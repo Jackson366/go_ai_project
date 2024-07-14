@@ -1,0 +1,41 @@
+Server:
+  RunMode: debug
+  HttpPort: 8089
+  ReadTimeout: 60
+  WriteTimeout: 60
+App:
+  DefaultPageSize: 10
+  MaxPageSize: 100
+  DefaultContextTimeout: 60
+  LogSavePath: ./storage/logs
+  LogFileName: app
+  LogFileExt: .log
+  UploadSavePath: ./storage/uploads
+  UploadServerUrl: http://127.0.0.1:8089/static
+  uploadImageMaxSize: 10 # MB
+  UploadImageAllowExts:
+    - .jpg
+    - .jpeg
+    - .png
+Database:
+  DBType: mysql
+  UserName: root
+  Password: Lp680832
+  Host: 127.0.0.1:3306
+  DBName: my_db
+#  TablePrefix: blog_
+  Charset: utf8
+  ParseTime: True
+  MaxIdleConns: 10
+  MaxOpenConns: 30
+Redis:
+  DB: 1
+  Host: 127.0.0.1:6379
+  Password:
+  Timeout: 5
+JWT:
+  Secret: superdata
+  Issuer: ai-project
+  TokenExpireTime: 72000
+Ai:
+  APIKey: 17045bbd4e5db9bc76b98c5557c6cbcd.UvQCu5rFjOFp3fCq

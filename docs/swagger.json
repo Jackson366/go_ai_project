@@ -1,0 +1,75 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "jackson366 使用chatglm4的能力所开发的AI项目",
+        "title": "AI_Project_DEMO",
+        "termsOfService": "http://www.github.com",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.github.com",
+            "email": "2391815999@qq.com"
+        },
+        "license": {
+            "name": "The MIT License (MIT)",
+            "url": "http://www.github.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8089",
+    "basePath": "/api/v1",
+    "paths": {
+        "/login": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "用户登录",
+                "parameters": [
+                    {
+                        "description": "用户账号",
+                        "name": "UserAccount",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户密码",
+                        "name": "UserPassword",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "请求参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/errcode.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/errcode.Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "errcode.Error": {
+            "type": "object"
+        }
+    }
+}
