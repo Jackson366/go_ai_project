@@ -20,7 +20,7 @@ App:
 Database:
   DBType: mysql
   UserName: root
-  Password: Lp680832
+  Password: xxxxxxxxx
   Host: 127.0.0.1:3306
   DBName: my_db
 #  TablePrefix: blog_
@@ -38,4 +38,4 @@ JWT:
   Issuer: ai-project
   TokenExpireTime: 72000
 Ai:
-  APIKey: 17045bbd4e5db9bc76b98c5557c6cbcd.UvQCu5rFjOFp3fCq
+  APIKey: xxxxxxxxxxxxxxx.xxxxxxxxxxxxx
