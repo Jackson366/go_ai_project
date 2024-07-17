@@ -10,6 +10,12 @@ type Response struct {
 	Ctx *gin.Context
 }
 
+type SwaggerResponse struct {
+	Code int         `json:"code"`
+	Msg  string      `json:"msg"`
+	Data interface{} `json:"data"`
+}
+
 type Pager struct {
 	Page      int `json:"page"`
 	PageSize  int `json:"page_size"`

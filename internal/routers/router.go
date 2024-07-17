@@ -28,11 +28,12 @@ func NewRouter() *gin.Engine {
 	}
 	r.Use(middleware.ContextTimeout(global.AppSetting.DefaultContextTimeout))
 	r.Use(middleware.Translations())
-	//url := ginSwagger.URL("http://localhost:8000/swagger/doc.json")
+	//url := ginSwagger.URL("http://localhost:8089/swagger/doc.json")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	ping := v1.NewPing()
 	user := v1.NewUser()
+	app := v1.NewApp()
 	r.POST("/login", user.Login)
 	r.POST("/register", user.Register)
 	r.Use(middleware.JWT()).POST("/logout", user.Logout)
@@ -46,6 +47,13 @@ func NewRouter() *gin.Engine {
 		apiv1.GET("/user/get/info", user.GetUserInfoById)
 		apiv1.PUT("/user/update/my", user.UpdateMyUser)
 		apiv1.GET("/user/list/info", user.ListUserInfoByPage)
+
+		apiv1.POST("/app/add", app.AddApp)
+		apiv1.DELETE("/app/delete/:id", app.DeleteApp)
+		apiv1.GET("/app/get/info/:id", app.GetAppInfo)
+		apiv1.GET("/app/list/info", app.ListAppInfoByPage)
+		apiv1.GET("/app/list/my/info", app.ListMyAppInfoByPage)
+		apiv1.PUT("/app/edit", app.EditApp)
 		apiv1.Use(middleware.Auth(AdminRole))
 		{
 			apiv1.GET("/ping", ping.Ping)
@@ -54,7 +62,12 @@ func NewRouter() *gin.Engine {
 			apiv1.PUT("/user/update", user.UpdateUser)
 			apiv1.DELETE("/user/delete/:id", user.DeleteUser)
 			apiv1.GET("/user/list", user.ListUserByPage)
+
+			apiv1.PUT("/app/update", app.UpdateApp)
+			apiv1.GET("/app/list", app.ListAppByPage)
+			apiv1.PUT("/app/review", app.ReviewApp)
 		}
+
 	}
 	return r
 }

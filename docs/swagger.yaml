@@ -1,6 +1,83 @@
 basePath: /api/v1
 definitions:
+  app.Pager:
+    properties:
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total_rows:
+        type: integer
+    type: object
   errcode.Error:
+    type: object
+  model.User:
+    properties:
+      createTime:
+        type: string
+      id:
+        type: integer
+      isDelete:
+        type: integer
+      mpOpenId:
+        type: string
+      unionId:
+        type: string
+      updateTime:
+        type: string
+      userAccount:
+        type: string
+      userAvatar:
+        type: string
+      userName:
+        type: string
+      userPassword:
+        type: string
+      userProfile:
+        type: string
+      userRole:
+        type: string
+    type: object
+  model.UserSwagger:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/model.User'
+        type: array
+      pager:
+        $ref: '#/definitions/app.Pager'
+    type: object
+  service.LoginUserInfo:
+    properties:
+      createTime:
+        type: string
+      id:
+        type: integer
+      updateTime:
+        type: string
+      userAvatar:
+        type: string
+      userName:
+        type: string
+      userProfile:
+        type: string
+      userRole:
+        type: string
+    type: object
+  service.UserInfo:
+    properties:
+      createTime:
+        type: string
+      id:
+        type: integer
+      userAvatar:
+        type: string
+      userName:
+        type: string
+      userProfile:
+        type: string
+      userRole:
+        type: string
     type: object
 host: localhost:8089
 info:
@@ -39,12 +116,470 @@ paths:
           schema:
             type: string
         "400":
-          description: 请求参数错误
+          description: 失败
           schema:
             $ref: '#/definitions/errcode.Error'
         "500":
-          description: 内部错误
+          description: 服务器内部错误
           schema:
             $ref: '#/definitions/errcode.Error'
       summary: 用户登录
+  /logout:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "400":
+          description: 失败
+          schema:
+            type: string
+      summary: 用户登出
+  /register:
+    post:
+      parameters:
+      - description: 用户账号
+        in: body
+        name: UserAccount
+        required: true
+        schema:
+          type: string
+      - description: 用户密码
+        in: body
+        name: UserPassword
+        required: true
+        schema:
+          type: string
+      - description: 确认密码
+        in: body
+        name: ConfirmPassword
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "400":
+          description: 失败"、
+          schema:
+            type: string
+      summary: 用户注册
+  /user/add:
+    post:
+      parameters:
+      - description: 用户账号
+        in: body
+        name: UserAccount
+        required: true
+        schema:
+          type: string
+      - description: 用户名称
+        in: body
+        name: UserName
+        required: true
+        schema:
+          type: string
+      - description: 用户密码
+        in: body
+        name: UserPassword
+        required: true
+        schema:
+          type: string
+      - description: 用户邮箱
+        in: body
+        name: UserEmail
+        required: true
+        schema:
+          type: string
+      - description: 用户电话
+        in: body
+        name: UserPhone
+        required: true
+        schema:
+          type: string
+      - description: 用户性别
+        in: body
+        name: UserSex
+        required: true
+        schema:
+          type: string
+      - description: 用户年龄
+        in: body
+        name: UserAge
+        required: true
+        schema:
+          type: string
+      - description: 用户地址
+        in: body
+        name: UserAddress
+        required: true
+        schema:
+          type: string
+      - description: 用户头像
+        in: body
+        name: UserAvatar
+        required: true
+        schema:
+          type: string
+      - description: 用户描述
+        in: body
+        name: UserDesc
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "400":
+          description: 失败
+          schema:
+            type: string
+      summary: 添加用户
+  /user/delete/{id}:
+    delete:
+      parameters:
+      - description: 用户ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "400":
+          description: 失败
+          schema:
+            type: string
+      summary: 删除用户
+  /user/get/info/{id}:
+    get:
+      parameters:
+      - description: 用户ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/service.UserInfo'
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/errcode.Error'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/errcode.Error'
+      summary: 获取用户信息
+  /user/get/login:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/service.LoginUserInfo'
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/errcode.Error'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/errcode.Error'
+      summary: 获取当前用户信息
+  /user/list:
+    get:
+      parameters:
+      - description: 页码
+        in: query
+        name: Page
+        required: true
+        type: integer
+      - description: 每页显示条数
+        in: query
+        name: PageSize
+        required: true
+        type: integer
+      - description: 用户账号
+        in: query
+        name: UserAccount
+        type: string
+      - description: 用户名称
+        in: query
+        name: UserName
+        type: string
+      - description: 用户邮箱
+        in: query
+        name: UserEmail
+        type: string
+      - description: 用户电话
+        in: query
+        name: UserPhone
+        type: string
+      - description: 用户性别
+        in: query
+        name: UserSex
+        type: string
+      - description: 用户年龄
+        in: query
+        name: UserAge
+        type: string
+      - description: 用户地址
+        in: query
+        name: UserAddress
+        type: string
+      - description: 用户头像
+        in: query
+        name: UserAvatar
+        type: string
+      - description: 用户描述
+        in: query
+        name: UserDesc
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/model.UserSwagger'
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/errcode.Error'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/errcode.Error'
+      summary: 获取用户列表
+  /user/list/info:
+    get:
+      parameters:
+      - description: 页码
+        in: query
+        name: Page
+        required: true
+        type: integer
+      - description: 每页显示条数
+        in: query
+        name: PageSize
+        required: true
+        type: integer
+      - description: 用户账号
+        in: query
+        name: UserAccount
+        type: string
+      - description: 用户名称
+        in: query
+        name: UserName
+        type: string
+      - description: 用户邮箱
+        in: query
+        name: UserEmail
+        type: string
+      - description: 用户电话
+        in: query
+        name: UserPhone
+        type: string
+      - description: 用户性别
+        in: query
+        name: UserSex
+        type: string
+      - description: 用户年龄
+        in: query
+        name: UserAge
+        type: string
+      - description: 用户地址
+        in: query
+        name: UserAddress
+        type: string
+      - description: 用户头像
+        in: query
+        name: UserAvatar
+        type: string
+      - description: 用户描述
+        in: query
+        name: UserDesc
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/model.UserSwagger'
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/errcode.Error'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/errcode.Error'
+      summary: 获取用户信息列表
+  /user/update:
+    put:
+      parameters:
+      - description: 用户账号
+        in: body
+        name: UserAccount
+        required: true
+        schema:
+          type: string
+      - description: 用户名称
+        in: body
+        name: UserName
+        required: true
+        schema:
+          type: string
+      - description: 用户密码
+        in: body
+        name: UserPassword
+        required: true
+        schema:
+          type: string
+      - description: 用户邮箱
+        in: body
+        name: UserEmail
+        required: true
+        schema:
+          type: string
+      - description: 用户电话
+        in: body
+        name: UserPhone
+        required: true
+        schema:
+          type: string
+      - description: 用户性别
+        in: body
+        name: UserSex
+        required: true
+        schema:
+          type: string
+      - description: 用户年龄
+        in: body
+        name: UserAge
+        required: true
+        schema:
+          type: string
+      - description: 用户地址
+        in: body
+        name: UserAddress
+        required: true
+        schema:
+          type: string
+      - description: 用户头像
+        in: body
+        name: UserAvatar
+        required: true
+        schema:
+          type: string
+      - description: 用户描述
+        in: body
+        name: UserDesc
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "400":
+          description: 失败
+          schema:
+            type: string
+      summary: 更新用户
+  /user/update/my:
+    put:
+      parameters:
+      - description: 用户账号
+        in: body
+        name: UserAccount
+        required: true
+        schema:
+          type: string
+      - description: 用户名称
+        in: body
+        name: UserName
+        required: true
+        schema:
+          type: string
+      - description: 用户邮箱
+        in: body
+        name: UserEmail
+        required: true
+        schema:
+          type: string
+      - description: 用户电话
+        in: body
+        name: UserPhone
+        required: true
+        schema:
+          type: string
+      - description: 用户性别
+        in: body
+        name: UserSex
+        required: true
+        schema:
+          type: string
+      - description: 用户年龄
+        in: body
+        name: UserAge
+        required: true
+        schema:
+          type: string
+      - description: 用户地址
+        in: body
+        name: UserAddress
+        required: true
+        schema:
+          type: string
+      - description: 用户头像
+        in: body
+        name: UserAvatar
+        required: true
+        schema:
+          type: string
+      - description: 用户描述
+        in: body
+        name: UserDesc
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            type: string
+        "400":
+          description: 失败
+          schema:
+            type: string
+      summary: 更新当前用户信息
 swagger: "2.0"

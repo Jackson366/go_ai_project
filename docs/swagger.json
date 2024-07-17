@@ -52,15 +52,713 @@
                         }
                     },
                     "400": {
-                        "description": "请求参数错误",
+                        "description": "失败",
                         "schema": {
                             "$ref": "#/definitions/errcode.Error"
                         }
                     },
                     "500": {
-                        "description": "内部错误",
+                        "description": "服务器内部错误",
                         "schema": {
                             "$ref": "#/definitions/errcode.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "用户登出",
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "用户注册",
+                "parameters": [
+                    {
+                        "description": "用户账号",
+                        "name": "UserAccount",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户密码",
+                        "name": "UserPassword",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "确认密码",
+                        "name": "ConfirmPassword",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "失败\"、",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/add": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "添加用户",
+                "parameters": [
+                    {
+                        "description": "用户账号",
+                        "name": "UserAccount",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户名称",
+                        "name": "UserName",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户密码",
+                        "name": "UserPassword",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户邮箱",
+                        "name": "UserEmail",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户电话",
+                        "name": "UserPhone",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户性别",
+                        "name": "UserSex",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户年龄",
+                        "name": "UserAge",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户地址",
+                        "name": "UserAddress",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户头像",
+                        "name": "UserAvatar",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户描述",
+                        "name": "UserDesc",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/delete/{id}": {
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "删除用户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "用户ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/get/info/{id}": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "获取用户信息",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "用户ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "$ref": "#/definitions/service.UserInfo"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "$ref": "#/definitions/errcode.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/errcode.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/get/login": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "获取当前用户信息",
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "$ref": "#/definitions/service.LoginUserInfo"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "$ref": "#/definitions/errcode.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/errcode.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/list": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "获取用户列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "页码",
+                        "name": "Page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "每页显示条数",
+                        "name": "PageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户账号",
+                        "name": "UserAccount",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户名称",
+                        "name": "UserName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户邮箱",
+                        "name": "UserEmail",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户电话",
+                        "name": "UserPhone",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户性别",
+                        "name": "UserSex",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户年龄",
+                        "name": "UserAge",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户地址",
+                        "name": "UserAddress",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户头像",
+                        "name": "UserAvatar",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户描述",
+                        "name": "UserDesc",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "$ref": "#/definitions/model.UserSwagger"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "$ref": "#/definitions/errcode.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/errcode.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/list/info": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "获取用户信息列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "页码",
+                        "name": "Page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "每页显示条数",
+                        "name": "PageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户账号",
+                        "name": "UserAccount",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户名称",
+                        "name": "UserName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户邮箱",
+                        "name": "UserEmail",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户电话",
+                        "name": "UserPhone",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户性别",
+                        "name": "UserSex",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户年龄",
+                        "name": "UserAge",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户地址",
+                        "name": "UserAddress",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户头像",
+                        "name": "UserAvatar",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户描述",
+                        "name": "UserDesc",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "$ref": "#/definitions/model.UserSwagger"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "$ref": "#/definitions/errcode.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/errcode.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/update": {
+            "put": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "更新用户",
+                "parameters": [
+                    {
+                        "description": "用户账号",
+                        "name": "UserAccount",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户名称",
+                        "name": "UserName",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户密码",
+                        "name": "UserPassword",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户邮箱",
+                        "name": "UserEmail",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户电话",
+                        "name": "UserPhone",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户性别",
+                        "name": "UserSex",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户年龄",
+                        "name": "UserAge",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户地址",
+                        "name": "UserAddress",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户头像",
+                        "name": "UserAvatar",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户描述",
+                        "name": "UserDesc",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/update/my": {
+            "put": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "更新当前用户信息",
+                "parameters": [
+                    {
+                        "description": "用户账号",
+                        "name": "UserAccount",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户名称",
+                        "name": "UserName",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户邮箱",
+                        "name": "UserEmail",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户电话",
+                        "name": "UserPhone",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户性别",
+                        "name": "UserSex",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户年龄",
+                        "name": "UserAge",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户地址",
+                        "name": "UserAddress",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户头像",
+                        "name": "UserAvatar",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "用户描述",
+                        "name": "UserDesc",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -68,8 +766,126 @@
         }
     },
     "definitions": {
+        "app.Pager": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer"
+                },
+                "page_size": {
+                    "type": "integer"
+                },
+                "total_rows": {
+                    "type": "integer"
+                }
+            }
+        },
         "errcode.Error": {
             "type": "object"
+        },
+        "model.User": {
+            "type": "object",
+            "properties": {
+                "createTime": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isDelete": {
+                    "type": "integer"
+                },
+                "mpOpenId": {
+                    "type": "string"
+                },
+                "unionId": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "string"
+                },
+                "userAccount": {
+                    "type": "string"
+                },
+                "userAvatar": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "userPassword": {
+                    "type": "string"
+                },
+                "userProfile": {
+                    "type": "string"
+                },
+                "userRole": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.UserSwagger": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.User"
+                    }
+                },
+                "pager": {
+                    "$ref": "#/definitions/app.Pager"
+                }
+            }
+        },
+        "service.LoginUserInfo": {
+            "type": "object",
+            "properties": {
+                "createTime": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "updateTime": {
+                    "type": "string"
+                },
+                "userAvatar": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "userProfile": {
+                    "type": "string"
+                },
+                "userRole": {
+                    "type": "string"
+                }
+            }
+        },
+        "service.UserInfo": {
+            "type": "object",
+            "properties": {
+                "createTime": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "userAvatar": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "userProfile": {
+                    "type": "string"
+                },
+                "userRole": {
+                    "type": "string"
+                }
+            }
         }
     }
 }

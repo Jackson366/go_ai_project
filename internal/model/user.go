@@ -3,6 +3,7 @@ package model
 import (
 	"errors"
 	"github.com/jinzhu/gorm"
+	"goAiproject/pkg/app"
 )
 
 type User struct {
@@ -15,6 +16,11 @@ type User struct {
 	UserAvatar   string `gorm:"type:varchar(1024);column:userAvatar" json:"userAvatar"`
 	UserProfile  string `gorm:"type:varchar(512);column:userProfile" json:"userProfile"`
 	UserRole     string `gorm:"type:varchar(256);default:'user';not null;column:userRole" json:"userRole"`
+}
+
+type UserSwagger struct {
+	List  []*User
+	Pager *app.Pager
 }
 
 func (u User) TableName() string {
